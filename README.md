@@ -3,7 +3,7 @@
 [![ECIR'18 Best Short Paper](https://img.shields.io/badge/ECIR'18-Best%20Short%20Paper-brightgreen.svg)](http://ecir2018.org)
 [![PyPI Downloads](https://static.pepy.tech/badge/yake)](https://pepy.tech/projects/yake)
 [![PyPI - Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://pypi.org/project/YAKE/)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LIAAD/yake/blob/gh-pages/1YAKE.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/INESCTEC/yake/blob/gh-pages/1YAKE.ipynb)
 
 YAKE! is a lightweight unsupervised automatic keyword extraction method that uses text statistical features to select the most important keywords from a document. It requires no training, external corpus, or dictionaries, and works across multiple languages and domains regardless of text size.
 
@@ -17,7 +17,7 @@ YAKE! is a lightweight unsupervised automatic keyword extraction method that use
 ## Quick Installation
 
 ```bash
-pip install git+https://github.com/LIAAD/yake
+pip install git+https://github.com/INESCTEC/yake
 ```
 
 or
@@ -25,6 +25,7 @@ or
 ```bash
 pip install yake
 ```
+
 
 ## Basic Usage
 
@@ -49,7 +50,7 @@ Options:
 	  --help                          Show this message and exit.
 ```
 
-Don't know which Deduplication function to use, see more [here](https://liaad.github.io/yake/docs/-getting-started#keyword-deduplication-methods)
+Don't know which Deduplication function to use, see more [here](https://inesctec.github.io/yake/docs/-getting-started#keyword-deduplication-methods)
 
 #### Usage (Python)
 
@@ -104,6 +105,13 @@ custom_kw_extractor = yake.KeywordExtractor(lan="pt")
 keywords = custom_kw_extractor.extract_keywords(text)
 ```
 
+## Lemmatization (v0.6.0+)
+
+YAKE! now supports keyword lemmatization to aggregate morphological variations (e.g., "tree" and "trees")
+
+See more [here](https://inesctec.github.io/yake/docs/-getting-started#lemmatization)
+
+
 ## Text Highlighting
 
 YAKE! includes a highlighting feature to mark keywords in text:
@@ -125,8 +133,8 @@ custom_th = TextHighlighter(
 ## Where to Find YAKE!
 
 - 🌐 Online demo: [http://yake.inesctec.pt](http://yake.inesctec.pt)
-- 🔌 Documentation site: [https://liaad.github.io/yake/docs/--home](https://liaad.github.io/yake/docs/--home)
-- 📦 Python package: [https://github.com/LIAAD/yake_demo](https://github.com/LIAAD/yake_demo)
+- 🔌 Documentation site: [https://inesctec.github.io/yake/docs/--home](https://liaad.github.io/yake/)
+- 📦 Python package: [https://github.com/INESCTEC/yake](https://github.com/INESCTEC/yake)
 - 💻 Pypi: [https://pypi.org/project/yake/](https://pypi.org/project/yake/)
 
 ## Citation

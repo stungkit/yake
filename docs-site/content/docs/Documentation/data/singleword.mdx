@@ -20,9 +20,12 @@ a relevance score for each word.
 
 import math
 import numpy as np
+import networkx as nx
 ```
 
 The `SingleWord` class stores and calculates statistical features for individual terms, including frequency, position, spread, and relationship metrics. These features are used to calculate a relevance score that indicates the word's importance in the document.
+
+> **Performance Note:** This class uses `__slots__` for memory optimization with fast access to `id` and `g` attributes while storing most data in a dictionary for flexibility.
 
 ## Constructor
 
@@ -33,17 +36,21 @@ The `SingleWord` class stores and calculates statistical features for individual
     </AccordionTrigger>
     <AccordionContent>
       ```python
-      def __init__(self, unique, idx, graph):
+      def __init__(self, unique: str, idx: int, graph: nx.DiGraph):
           """
           Initialize a SingleWord term object.
           
           Args:
-              unique (str): The unique normalized term this object represents
-              idx (int): Unique identifier for the term in the document
-              graph (networkx.DiGraph): Word co-occurrence graph from the document
+              unique: The unique normalized term this object represents
+              idx: Unique identifier for the term in the document
+              graph: Word co-occurrence graph from the document
           """
           self.id = idx  # Fast access needed as it's used in graph operations
           self.g = graph  # Fast access needed for network calculations
+
+          # Cache for graph metrics to avoid recalculation
+          self._graph_metrics_cache = None
+          self._graph_version = 0  # Track graph changes for cache invalidation
 
           self.data = {
               # Basic information
@@ -252,10 +259,11 @@ position = term.get("wpos", 1.0)
       ```python
       def get_graph_metrics(self):
           """
-          Calculate all graph-based metrics at once.
+          Calculate all graph-based metrics at once with caching.
           
           Analyzes the term's connections in the co-occurrence graph to compute
           various relationship metrics that measure its contextual importance.
+          Results are cached to avoid recalculation on subsequent calls.
           
           Returns:
               dict: Dictionary containing the calculated graph metrics:
@@ -266,6 +274,11 @@ position = term.get("wpos", 1.0)
                   - wil: Word importance left (sum of incoming edge weights)
                   - pwl: Probability weight left (wdl/wil)
           """
+          # Return cached results if available
+          if self._graph_metrics_cache is not None:
+              return self._graph_metrics_cache
+
+          # Calculate metrics if not cached
           # Out-edges metrics
           wdr = len(self.g.out_edges(self.id))
           wir = sum(d["tf"] for (_, _, d) in self.g.out_edges(self.id, data=True))
@@ -276,7 +289,13 @@ position = term.get("wpos", 1.0)
           wil = sum(d["tf"] for (_, _, d) in self.g.in_edges(self.id, data=True))
           pwl = 0 if wil == 0 else wdl / wil
 
-          return {"wdr": wdr, "wir": wir, "pwr": pwr, "wdl": wdl, "wil": wil, "pwl": pwl}
+          # Cache the results
+          self._graph_metrics_cache = {
+              "wdr": wdr, "wir": wir, "pwr": pwr,
+              "wdl": wdl, "wil": wil, "pwl": pwl
+          }
+
+          return self._graph_metrics_cache
       ```
     </AccordionContent>
   </AccordionItem>

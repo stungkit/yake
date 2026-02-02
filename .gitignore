@@ -10,8 +10,8 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-*.so
 *.pyc
+*.so
 
 # Virtual environments
 .venv/
@@ -40,3 +40,8 @@ build/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Benchmark results
+.benchmarks/
+benchmark_histogram.svg
+*.prof
