@@ -154,7 +154,6 @@ The `Levenshtein` class offers methods to measure the difference between two str
           if len1 <= 3:
               return Levenshtein._simple_distance(seq1, seq2)
 
-          # Optimized algorithm with only two rows (memory efficient)
           # Instead of full matrix, we only keep previous and current row
           previous_row = list(range(len2 + 1))
           current_row = [0] * (len2 + 1)

@@ -120,7 +120,6 @@ def get_tag(word: str, i: int, exclude: frozenset) -> str:
         return "d"
 
     # Count character types for classification
-    # Optimized: single pass through word instead of multiple
     cdigit = calpha = cexclude = 0
     for c in word:
         if c.isdigit():

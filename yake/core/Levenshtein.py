@@ -111,7 +111,6 @@ class Levenshtein:
         if len1 <= 3:
             return Levenshtein._simple_distance(seq1, seq2)
 
-        # Optimized algorithm with only two rows (memory efficient)
         previous_row = list(range(len2 + 1))
         current_row = [0] * (len2 + 1)
 

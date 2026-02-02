@@ -247,10 +247,8 @@ class DataCore:
         # Process each word in the sentence
         for pos_sent, word in enumerate(sentence):
             # Check if the word is just punctuation (all characters are excluded)
-            # Optimized: use all() instead of creating a list
             if all(c in self.exclude for c in word):
                 # If we have a block of words, save it and start a new block
-                # Optimized: use truthiness instead of len() > 0
                 if block_of_word_obj:
                     sentence_obj_aux.append(block_of_word_obj)
                     block_of_word_obj = []
@@ -266,12 +264,10 @@ class DataCore:
                 )
 
         # Save any remaining word block
-        # Optimized: use truthiness instead of len() > 0
         if block_of_word_obj:
             sentence_obj_aux.append(block_of_word_obj)
 
         # Add processed sentence to collection if not empty
-        # Optimized: use truthiness instead of len() > 0
         if sentence_obj_aux:
             self.sentences_obj.append(sentence_obj_aux)
 
@@ -466,7 +462,6 @@ class DataCore:
         valid_tfs = np.array([x.tf for x in valid_terms])
 
         # Skip if no valid terms
-        # Optimized: use 'not' instead of len() == 0
         if not valid_tfs.size:
             return
 
