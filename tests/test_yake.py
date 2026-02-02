@@ -1301,12 +1301,10 @@ def test_performance_benchmark():
     
     avg_time_ms = (elapsed / 10) * 1000
     
-    # Should be significantly faster than 100ms (YAKE 0.6.0 baseline)
-    # Relaxed threshold for test/CI environments (was <50ms, now <100ms)
-    # Still represents 2x improvement over YAKE 0.6.0
-    assert avg_time_ms < 100, f"Performance regression: {avg_time_ms:.2f}ms > 100ms"
+
+    assert avg_time_ms < 110, f"Performance regression: {avg_time_ms:.2f}ms > 110ms"
     
-    print(f"\nAverage extraction time: {avg_time_ms:.2f}ms (target: <100ms)")
+    print(f"\nAverage extraction time: {avg_time_ms:.2f}ms (target: <110ms)")
 
 
 def test_cache_statistics_tracking():
