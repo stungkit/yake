@@ -129,7 +129,7 @@ def test_n1_EN():
     pyake = yake.KeywordExtractor(lan="en", n=1, top=20)  # CORRECTED: top=20 (was 21)
     result = pyake.extract_keywords(text_content)
     print(result)
-    # Expected results from YAKE 0.6.0/2.0 (CORRECTED - verified against actual output)
+    # Expected results
     res = [
         ("Google", 0.02509259635302287),
         ("Kaggle", 0.027297150442917317),
@@ -1274,9 +1274,8 @@ def test_backwards_compatibility():
 
 
 def test_performance_benchmark():
-    """"    Performance test: Verify ~90% improvement is maintained.
-    YAKE 0.6.0: ~100ms per extraction
-    YAKE 2.0: ~10ms per extraction (target)
+    """"    Performance test: Verify improvement is maintained.
+
     """
     import time
     
