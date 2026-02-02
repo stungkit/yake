@@ -146,20 +146,6 @@ export default function HomePage() {
                   <code>pip install git+https://github.com/INESCTEC/yake</code>
                 </pre>
               </div>
-              
-              <div>
-                <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">Basic usage:</div>
-                <pre className="bg-gray-900 dark:bg-gray-950 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-                  <code>{`import yake
-
-text = "Your text here..."
-kw_extractor = yake.KeywordExtractor()
-keywords = kw_extractor.extract_keywords(text)
-
-for kw, score in keywords:
-    print(f"{kw}: {score:.4f}")`}</code>
-                </pre>
-              </div>
             </div>
           </div>
         </div>
